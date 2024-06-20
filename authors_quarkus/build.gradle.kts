@@ -4,7 +4,7 @@ plugins {
 
 }
 
-group = "com.distribuida"
+group = "org.example"
 version = "unspecified"
 
 repositories {
@@ -31,16 +31,8 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.postgresql/postgresql
     implementation("org.postgresql:postgresql:42.7.3")
-
-
 }
-sourceSets{
-    main{
-        java{
-            output.setResourcesDir(file("${buildDir}/classes/java/main"))
-        }
-    }
-}
+
 tasks.test {
     useJUnitPlatform()
 }
