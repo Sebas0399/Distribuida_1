@@ -6,7 +6,9 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.example.books.clients.AuthorRestClient;
 import org.example.books.db.Book;
+import org.example.books.dtos.BookDto;
 import org.example.books.repo.BooksRepository;
 
 import java.util.List;
@@ -20,10 +22,24 @@ public class BookRest {
 
     @Inject
     BooksRepository repo;
+    @Inject
+    @RestClient
+    AuthorRestClient authorRest;
 
     @GET
-    public List<Book> findAll(){
-        return repo.listAll();
+    public List<BookDto> findAll(){
+
+        var books= repo.listAll();
+        return books.stream().map(obj->{
+            //conectarse al servicio autor
+            // http://localhost:9090/authors/{id}
+            var author=authorRest.findAuthor(obj.getAuthorId());
+
+            BookDto dto= new BookDto();
+            dto.setId(obj.getId());
+            dto.setAuthorName(author);
+            return dto;
+        }).toList();
     }
 
     @GET

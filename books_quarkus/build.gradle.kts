@@ -31,6 +31,12 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.postgresql/postgresql
     implementation("org.postgresql:postgresql:42.7.3")
+    //REST Client
+
+    implementation("io.quarkus:quarkus-rest-client-reactive")
+    implementation("io.quarkus:quarkus-rest-client-reactive-jackson")
+
+
 }
 
 tasks.test {
