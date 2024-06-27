@@ -6,6 +6,7 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.example.books.clients.AuthorRestClient;
 import org.example.books.db.Book;
 import org.example.books.dtos.BookDto;
@@ -33,11 +34,11 @@ public class BookRest {
         return books.stream().map(obj->{
             //conectarse al servicio autor
             // http://localhost:9090/authors/{id}
-            var author=authorRest.findAuthor(obj.getAuthorId());
+            var author=authorRest.findById(obj.getAuthorId());
 
             BookDto dto= new BookDto();
             dto.setId(obj.getId());
-            dto.setAuthorName(author);
+            dto.setAuthorName(author.getFirstName());
             return dto;
         }).toList();
     }

@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 import org.example.books.dtos.AuthorDto;
 
 import java.util.List;
@@ -12,7 +13,8 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Transactional
-@RegisterRestClient(baseUri="http://localhost:9091")
+//@RegisterRestClient(configKey = "AuthorRestClient")
+@RegisterRestClient(baseUri = "stork://my-service")
 public interface AuthorRestClient {
    // @GET
     //public List<Object> findAll() ;

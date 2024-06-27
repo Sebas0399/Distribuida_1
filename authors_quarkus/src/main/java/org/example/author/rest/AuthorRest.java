@@ -30,6 +30,8 @@ class AuthorRest {
     @GET
     @Path("/{id}")
     public Response findById(@PathParam("id") Integer id) {
+        System.out.println("balanceado");
+
         var book = rep.findByIdOptional(id);
         if (book.isEmpty()) {
             return Response.status(Response.Status.NOT_FOUND).build();
